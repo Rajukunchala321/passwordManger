@@ -12,7 +12,7 @@ class InputsComponent extends Component {
             <input className='input' type='password' placeholder='Enter Password' />
             <button  type='submit'>Submit</button>
         </div>
-        <img src='' alt='' loading='lazy' />
+        
       </div>
       </>
     )

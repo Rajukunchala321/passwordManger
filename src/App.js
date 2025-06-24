@@ -5,13 +5,21 @@ import './App.css'
 
 
 class App extends Component {
+  
   render() {
+    let password_content =[
+    {
+      website_url:'',
+      user_name:'',
+      password:"",
+    }
+  ];
     return (
       <>
       <div className='psw-container'>
         <img className='Logo' src='https://assets.ccbp.in/frontend/react-js/password-manager-logo-img.png' alt='' />
         <InputComponent />
-        <PasswordContainerComponent />
+        <PasswordContainerComponent passwordContent={password_content}/>
       </div>
       </>
     )
