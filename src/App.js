@@ -5,26 +5,49 @@ import './App.css'
 
 
 class App extends Component {
-  
-  render() {
-    let password_content =[
-    {
-      id:1,
-      website_url:'',
-      user_name:'',
-      password:"",
+    constructor(){
+      super()
+      this.state= {
+        passwordList:[],
+      }
     }
-  ];
+    handleSubmitedData = (data)=>{
+      console.log('recived data', data)
+      this.setState((prevState)=>({
+        passwordList:[...prevState.passwordList, data],
+      }))
+    }
+  render() {
+    const {passwordList} = this.state 
+    console.log(passwordList) 
     return (
       <>
       <div className='psw-container'>
         <img className='Logo' src='https://assets.ccbp.in/frontend/react-js/password-manager-logo-img.png' alt='' />
-        <InputComponent />
-        {
-          password_content.map(each=>(
+        <InputComponent  onSubmit={this.handleSubmitedData}/>
+        <div className="pswManager-container">
+          <div className="psw-count-searchbar-container">
+            <div className="txt">
+              Your Passwords <span>0</span>{" "}
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Search here.."
+                className="searchbar"
+              />
+              <label>
+                <input type="checkbox" name="check" /> show password
+              </label>
+            </div>
+          </div>
+          {
+          passwordList.map(each=>(
               <PasswordContainerComponent key={each.id} eachPswContent={each}/>
           ))
         }
+        </div>
+        
         
       </div>
       </>
