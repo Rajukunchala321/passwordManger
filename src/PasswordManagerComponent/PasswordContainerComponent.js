@@ -3,14 +3,18 @@ import React, { Component } from 'react'
 export default class PasswordContainerComponent extends Component {
   
   render() {
-    const passwordContent =this.props;
-   console.log(passwordContent)
+    const eachPswContent =this.props;
+   console.log(eachPswContent)
     return (
       <>
         <div className='pswManager-container'>
              <div className='psw-count-searchbar-container'>
                 <div className='txt'>Your Passwords <span>0</span> </div>
-                <input type='text' placeholder='Search here..' className='searchbar'/>
+                <div>
+                  <input type='text' placeholder='Search here..' className='searchbar'/>
+                  <label><input type='checkbox' name='check' /> show password</label>
+                </div>
+               
                 
              </div>
              <div className='psw-card-container'>

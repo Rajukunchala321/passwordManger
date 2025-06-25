@@ -9,6 +9,7 @@ class App extends Component {
   render() {
     let password_content =[
     {
+      id:1,
       website_url:'',
       user_name:'',
       password:"",
@@ -19,7 +20,12 @@ class App extends Component {
       <div className='psw-container'>
         <img className='Logo' src='https://assets.ccbp.in/frontend/react-js/password-manager-logo-img.png' alt='' />
         <InputComponent />
-        <PasswordContainerComponent passwordContent={password_content}/>
+        {
+          password_content.map(each=>(
+              <PasswordContainerComponent key={each.id} eachPswContent={each}/>
+          ))
+        }
+        
       </div>
       </>
     )

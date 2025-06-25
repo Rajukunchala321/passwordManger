@@ -1,3 +1,9 @@
+.psw-count-searchbar-container> div{
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+  color:white;
+}
 .fields{
   font-size: 16px;
   font-family: Inter;
