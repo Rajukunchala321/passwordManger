@@ -2,8 +2,8 @@ import React, { Component } from "react";
 
 export default class PasswordContainerComponent extends Component {
   render() {
-    const {eachPswContent} = this.props;
-    const { websiteUrl, userName, password } = eachPswContent;
+    const {eachPswContent, showPassword, onDelete} = this.props;
+    const { websiteUrl, userName, password, id } = eachPswContent;
     console.log(websiteUrl);
     return (
       <>
@@ -13,9 +13,9 @@ export default class PasswordContainerComponent extends Component {
               <div className="fields-containers">
                 <div className="fields">website url:{websiteUrl}</div>
                 <div className="fields">User name: {userName}</div>
-                <div className="fields">Password: {password}</div>
+                <div className="fields">Password: {showPassword ? password: "*****"}</div>
               </div>
-              <button>Delete</button>
+              <button onClick={()=>onDelete(id)}>Delete</button>
             </div>
           </div>
       </>

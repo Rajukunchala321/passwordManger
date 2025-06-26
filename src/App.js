@@ -9,6 +9,8 @@ class App extends Component {
       super()
       this.state= {
         passwordList:[],
+        showPassword:false,
+        searchQuery:''
       }
     }
     handleSubmitedData = (data)=>{
@@ -17,9 +19,27 @@ class App extends Component {
         passwordList:[...prevState.passwordList, data],
       }))
     }
+    handlePassword = ()=>{
+      this.setState((prevState)=>({
+        showPassword: !prevState.showPassword,
+      }))
+    }
+    handleDelete =(id)=>{
+      this.setState((prevState)=>({
+        passwordList: prevState.passwordList.filter((item)=> item.id !== id)
+      }))
+    }
+    handleSearch =(event)=>{
+      this.setState({
+        searchQuery:event.target.value,
+      })
+    }
   render() {
-    const {passwordList} = this.state 
+    const {passwordList, searchQuery} = this.state 
     console.log(passwordList) 
+    const filteredList = passwordList.filter((item)=>(
+      item.websiteUrl.toLowerCase().includes(searchQuery.toLowerCase()) || item.userName.toLowerCase().includes(searchQuery.toLowerCase())
+    ))
     return (
       <>
       <div className='psw-container'>
@@ -27,23 +47,24 @@ class App extends Component {
         <InputComponent  onSubmit={this.handleSubmitedData}/>
         <div className="pswManager-container">
           <div className="psw-count-searchbar-container">
-            <div className="txt">
-              Your Passwords <span>0</span>{" "}
-            </div>
+            <p className="txt">
+              Your Passwords <span>{passwordList.length}</span>
+            </p>
             <div>
               <input
                 type="text"
                 placeholder="Search here.."
                 className="searchbar"
+                onChange={this.handleSearch}
               />
               <label>
-                <input type="checkbox" name="check" /> show password
+                <input type="checkbox" name="check" onChange={this.handlePassword}/> show password
               </label>
             </div>
           </div>
           {
-          passwordList.map(each=>(
-              <PasswordContainerComponent key={each.id} eachPswContent={each}/>
+          filteredList.map(each=>(
+              <PasswordContainerComponent key={each.id} eachPswContent={each} showPassword={this.state.showPassword} onDelete={this.handleDelete}/>
           ))
         }
         </div>
